@@ -18,9 +18,9 @@ class NmInput(nn.Module):
         self.layer4 = nn.Linear(16, 1, device=device)
 
     def forward(self, x):
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
+        x = torch.relu(self.layer1(x))
+        x = torch.relu(self.layer2(x))
+        x = torch.relu(self.layer3(x))
         x = self.layer4(x)
         return x
 
@@ -31,4 +31,4 @@ if __name__ == '__main__':
     print(model(input).shape)
     model.eval()
     model = torch.jit.script(model)
-    torch.jit.save(model,"testmodel.pt")
+    torch.jit.save(model, "testmodel.pt")
